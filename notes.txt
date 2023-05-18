@@ -1,0 +1,34 @@
+** Choose a data structure
+
+** Study the theory: Read about the data structure you've chosen, including its definition, properties, operations, and algorithms. You can refer to textbooks, online tutorials, or other resources to help   
+    you understand the theory.
+
+** Implement the data structure: 
+
+** Solve problems: Practice solving problems related to the data structure you've chosen. Start with simpler problems and gradually move on to more complex ones. LeetCode is a great resource for practice  
+   problems, as you've mentioned.
+
+	Analyze your solutions: Once you've solved a problem, analyze your solution to see if there's a way to improve it. Consider the time and space complexity of your solution and see if there's a     
+	more efficient way to solve the problem.
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Two Sum
+------------------------------------DONE
+
+Best Time to Buy and Sell Stock
+------------------------------------DONE
+
+Contains Duplicate
+------------------------------------DONE
+
+Intersection of Two Arrays II
+------------------------------------DONE
+
+Count Common Words With One Occurrence
+------------------------------------DONE
