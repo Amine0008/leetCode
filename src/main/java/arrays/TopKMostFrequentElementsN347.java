@@ -8,23 +8,36 @@ import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Queue;
+import java.util.stream.Collectors;
 
 public class TopKMostFrequentElementsN347 {
 	
 	public static void main(String [] args) {
 		
-			int[] nums = new int[] {5,6,4,8,5,4,5,9};
-			Queue<Integer> q = new PriorityQueue<>((a,b)->b-a);
-			for(int i = 0; i<nums.length;i++) {
-				q.add(nums[i]);
+		//example of removing top k lowest/highest elements from a collection with n elements
+		//in nlog(k) with a heap
+		
+		int[] nums = new int[] {1,2,3,4,5,6};
+		
+		Queue<Integer> maxHeap = new PriorityQueue<>((a,b)->b-a);
+		for(int i = 0; i < nums.length ; i++) {
+			if(i <= 2) {
+				maxHeap.add(nums[i]);
+				continue;
 			}
-			System.out.println(q);
-			System.out.println(q.poll());
+			if(maxHeap.peek()>nums[i]) {
+				maxHeap.poll();
+				maxHeap.add(nums[i]);
+			}
+			
+		}
+		
+		System.out.println(maxHeap);
 		
 	}
 
 	
-	  public static int[] topKFrequent(int[] nums, int k) {
+	  public static int[] topKFrequent1(int[] nums, int k) {
 	        Map<Integer,Integer> entriesCounterMap = new HashMap<>();
 	        for(int i = 0;i < nums.length; i++) {
 	        	if(!entriesCounterMap.containsKey(nums[i]))
@@ -78,6 +91,47 @@ public class TopKMostFrequentElementsN347 {
 	        return results.stream().mapToInt(Integer::intValue).toArray();
 	  }
 	  
+	  public int[] topKFrequent(int[] nums, int k) {
+		Map<Integer,Integer> elementFrequencyMap = new HashMap<>();
+		  
+		for(int i = 0; i<nums.length;i++) {
+			if(!elementFrequencyMap.containsKey(nums[i]))
+				elementFrequencyMap.put(nums[i], 0);
+			elementFrequencyMap.put(nums[i],elementFrequencyMap.get(nums[i])+1);
+		}
+		Queue<Integer> minFrequencyHeap = 
+				new PriorityQueue<>((a,b)->elementFrequencyMap.get(a)-elementFrequencyMap.get(b));
 	  
+	  List<Integer> mapkeys = new ArrayList<>(elementFrequencyMap.keySet());
+	  for(int i = 0; i<mapkeys.size();i++) {
+		if(i<k) {
+			minFrequencyHeap.add(mapkeys.get(i));
+			continue;
+		}
+		if(elementFrequencyMap.get(mapkeys.get(i))>elementFrequencyMap.get(minFrequencyHeap.peek())) {
+			minFrequencyHeap.poll();
+			minFrequencyHeap.add(mapkeys.get(i));
+		}
+		
+	  }
+	  return  minFrequencyHeap.stream().mapToInt(x->x).toArray();
+	  
+  }
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	
 	
 }
