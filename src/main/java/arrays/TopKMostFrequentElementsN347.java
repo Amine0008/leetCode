@@ -8,12 +8,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Queue;
-import java.util.stream.Collectors;
 
 public class TopKMostFrequentElementsN347 {
 	
 	public static void main(String [] args) {
-		
+		/*
 		//example of removing top k lowest/highest elements from a collection with n elements
 		//in nlog(k) with a heap
 		
@@ -32,12 +31,14 @@ public class TopKMostFrequentElementsN347 {
 			
 		}
 		
-		System.out.println(maxHeap);
+		System.out.println(maxHeap);*/
+		int[] nums = new int[] {1,1,1,2,2,3};
+		topKFrequent0(nums, 2);
 		
 	}
 
 	
-	  public static int[] topKFrequent1(int[] nums, int k) {
+	  public int[] topKFrequent1(int[] nums, int k) {
 	        Map<Integer,Integer> entriesCounterMap = new HashMap<>();
 	        for(int i = 0;i < nums.length; i++) {
 	        	if(!entriesCounterMap.containsKey(nums[i]))
@@ -63,7 +64,7 @@ public class TopKMostFrequentElementsN347 {
 	        return result.stream().mapToInt(Integer::intValue).toArray();
 	        
     }
-	  public static int[] topKFrequent2(int[] nums, int k) {
+	  public int[] topKFrequent2(int[] nums, int k) {
 		  Map<Integer,Integer> entriesCounterMap = new HashMap<>();
 	        for(int i = 0;i < nums.length; i++) {
 	        	if(!entriesCounterMap.containsKey(nums[i]))
@@ -90,7 +91,6 @@ public class TopKMostFrequentElementsN347 {
 	        
 	        return results.stream().mapToInt(Integer::intValue).toArray();
 	  }
-	  
 	  public int[] topKFrequent(int[] nums, int k) {
 		Map<Integer,Integer> elementFrequencyMap = new HashMap<>();
 		  
@@ -117,8 +117,38 @@ public class TopKMostFrequentElementsN347 {
 	  return  minFrequencyHeap.stream().mapToInt(x->x).toArray();
 	  
   }
-	  
-	  
+	  public static int[] topKFrequent0(int[] nums, int k ) {
+		  Map<Integer,Integer> frequencyMap = new HashMap<>();
+		  for(int i = 0; i<nums.length; i++) {
+			  if(!frequencyMap.containsKey(nums[i]))
+				  frequencyMap.put(nums[i], 0);
+			  frequencyMap.put(nums[i], frequencyMap.get(nums[i])+1);
+		  }
+		  List<List<Integer>> bucket = new ArrayList<>( nums.length);
+		  for(int i = 0; i<nums.length;i++) {
+			  bucket.set(i, null);
+		  }
+		  
+		  List<Integer> keys = new ArrayList<>(frequencyMap.keySet());
+
+		  for(int i = 0;i<keys.size(); i++) {
+			  if(bucket.get(frequencyMap.get(keys.get(i))) == null)
+				 bucket.set(frequencyMap.get(keys.get(i)), new ArrayList<>());
+			  bucket.get(frequencyMap.get(keys.get(i))).add(keys.get(i));
+		  }
+		  
+		  List<Integer> result = new ArrayList<>();
+		  
+		  for(int i = 0; i<bucket.size(); i++) {
+			 if(result.size() == k)
+				 break;
+			  if(bucket.get(i)!= null)
+				  result.addAll(bucket.get(i));
+			  
+		  }
+		  
+		  return result.stream().mapToInt(x->x).toArray();
+	  }
 	  
 	  
 	  
