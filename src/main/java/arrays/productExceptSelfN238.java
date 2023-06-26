@@ -29,6 +29,25 @@ public class productExceptSelfN238 {
     	return result;
     }
     
+    public int[] productExceptSelf2(int[] nums) {
+        
+    	int[] result = new int[nums.length];
+    	
+    	result[0] = 1;
+    	
+    	for(int i = 1; i<nums.length; i++ ) {
+    		result[i] = nums[i-1]*result[i-1];
+    	}
+    	int suffixConst = 1;
+    	for(int i = nums.length-2;i>=0;i--) {
+    		suffixConst = suffixConst * nums[i+1];
+    		result[i] = result[i] *  suffixConst;
+    	}
+    	
+    	return result;
+    }
+    
+    
     
     
     
