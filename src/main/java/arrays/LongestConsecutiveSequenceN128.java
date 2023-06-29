@@ -1,9 +1,11 @@
 package arrays;
 
+import java.util.Arrays;
 import java.util.HashMap;
-import java.util.LinkedList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 
@@ -32,7 +34,7 @@ public class LongestConsecutiveSequenceN128 {
     		addOnetoSequence(x,x, map);
     		}
     	}
-    	 int[] values = map.values().stream().mapToInt(Integer::intValue).toArray();
+    	 int[] values = map.values().stream().mapToInt(Integer:: intValue).toArray();
     	 if(values.length == 0)
     		 return 0;
     	 int result = values[0];
@@ -92,6 +94,27 @@ public class LongestConsecutiveSequenceN128 {
     		return size;
     	}
     }
+    
+    public int longestConsecutive3(int[] nums) {
+    	Set<Integer> input = Arrays.stream(nums).boxed().collect(Collectors.toSet());
+    	
+    	int maxLength = 0;
+    	for(Integer x: input) {
+    		if(!input.contains(x-1)) {
+    			//this is the start of a sequence
+    			int sequenceLength = 0;
+    			while(input.contains(x)) {
+    				sequenceLength++;
+    				x=x+1;
+    			}
+    			if(sequenceLength>maxLength)
+    				maxLength = sequenceLength;
+    		}
+    	}
+    	return maxLength;
+    }
+    
+    
     
     
     
