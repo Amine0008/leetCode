@@ -1,4 +1,4 @@
-package arrays;
+package ArraysAndHashing;
 
 
 //mala 7arb yazebi

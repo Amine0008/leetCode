@@ -1,5 +1,5 @@
 
-package arrays;
+package ArraysAndHashing;
 
 import java.util.HashMap;
 

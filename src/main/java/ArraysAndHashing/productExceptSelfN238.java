@@ -1,4 +1,4 @@
-package arrays;
+package ArraysAndHashing;
 
 
 public class productExceptSelfN238 {

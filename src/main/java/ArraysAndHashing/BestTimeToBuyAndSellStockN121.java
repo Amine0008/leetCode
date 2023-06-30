@@ -1,5 +1,5 @@
 
-package arrays;
+package ArraysAndHashing;
 
 public class BestTimeToBuyAndSellStockN121 {
 	
