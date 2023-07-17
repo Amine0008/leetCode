@@ -20,7 +20,7 @@ public class BaseBallGameN682 {
 			  else if(s.equals("D")) {
 				  record.add(record.peek()*2);
 			  }
-			  else if(s.charAt(0) == '+') {
+			  else if(s.equals("+")) {
 				  last = record.pop();
 				  newEntry = record.peek()+last;
 				  record.add(last);

@@ -3,11 +3,9 @@ package Stack;
 import java.util.Stack;
 
 public class ValidParenthesisN20 {
-	public static void main(String[] args) {
-		isValid("()");
-	}
 	
-	public static boolean isValid(String s) {
+	
+	public static boolean isValid2(String s) {
 	     int countedPairs = 0;
 	     int openCounter = 0; 
 	     int closedCounter =0;
@@ -50,4 +48,31 @@ public class ValidParenthesisN20 {
 		return ']';
 	}
 
+    public boolean isValid(String s) {
+        Stack<Character> closingParans = new Stack<>();
+        for(int i = 0; i < s.length(); i++) {
+        	if(s.charAt(i)=='[' || s.charAt(i)=='{' || s.charAt(i)=='(')
+        		closingParans.add(s.charAt(i));
+        	else {
+        		if(s.charAt(i) == '}') {
+        			if(closingParans.isEmpty() || '{' != closingParans.pop())
+        				return false;
+        		}
+        		else if(s.charAt(i) == ']') {
+           			if(closingParans.isEmpty() ||'[' != closingParans.pop())
+        				return false;
+        		}
+        		else if(s.charAt(i) == ')') {
+           			if(closingParans.isEmpty() ||'(' != closingParans.pop())
+        				return false;
+        		}
+        	}
+        }
+        if(!closingParans.isEmpty())
+        	return false;
+    	
+        
+    	return true;
+    }	
+	
 }
