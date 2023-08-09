@@ -43,4 +43,25 @@ public class GenerateParenthesesN22 {
     	}
     }
 
+    
+    
+    public List<String> generateParenthesisTest(int n) {
+     List<String> result = new ArrayList<>();
+     backTrack(result, "(", 2*n, 1,0);
+     
+     return result;
+    }
+    
+    public void backTrack(List<String> result, String currentComb,int maxLengthOfComb ,int numberOfOpenParans, int numberOfClosingParans) {
+    	if(currentComb.length() == maxLengthOfComb)
+    		result.add(currentComb);
+    	else if(numberOfOpenParans == maxLengthOfComb/2)
+    		backTrack(result, currentComb+")",maxLengthOfComb, numberOfOpenParans, numberOfClosingParans+1);
+    	else if(numberOfOpenParans == numberOfClosingParans)
+    		backTrack(result, currentComb+"(",maxLengthOfComb, numberOfOpenParans+1, numberOfClosingParans);
+    	else {
+    		backTrack(result, currentComb+")",maxLengthOfComb, numberOfOpenParans, numberOfClosingParans+1);
+    		backTrack(result, currentComb+"(",maxLengthOfComb, numberOfOpenParans+1, numberOfClosingParans);
+    	}
+    }
 }
