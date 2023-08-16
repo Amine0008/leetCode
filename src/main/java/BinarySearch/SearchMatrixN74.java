@@ -2,7 +2,7 @@ package BinarySearch;
 
 import java.util.Arrays;
 
-public class Main {
+public class SearchMatrixN74 {
 	
 	public static void main(String[] s) {
 		int [][] matrix = new int[][] {{1}};
