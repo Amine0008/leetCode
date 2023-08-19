@@ -1,3 +1,0 @@
-top k elements using a heap : 
-	https://www.youtube.com/watch?v=wptevk0bshY&ab_channel=WilliamFiset
-	https://www.youtube.com/watch?v=YPTqKIgVk-k&ab_channel=NeetCode	
