@@ -50,4 +50,17 @@ public class ReverseLinkedListN206 {
 	}
 	
 	
+	public ListNode reverseListV3(ListNode head) {
+    	ListNode pn = null;
+    	ListNode cn = head;
+    	ListNode nn = null;
+    	while(cn != null) {
+    		nn = cn.next;
+    		cn.next = pn;
+    		pn = cn;
+    		cn = nn;
+    	}
+    	return pn;
+    }
+	
 }
