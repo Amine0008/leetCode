@@ -56,4 +56,31 @@ public class IntersectionOfTwoLinkedListsN160 {
     	
     }
 
+    
+	public ListNode getIntersectionNodeV2(ListNode headA, ListNode headB) {
+		ListNode runnerA = headA;
+		ListNode runnerB = headB;
+		boolean runnerACompletedFirstLap = false;
+		boolean runnerBCompletedFirstLap = false;
+		while(runnerA != runnerB) {
+			if(runnerA.next == null && !runnerACompletedFirstLap) {
+				runnerA = headB;
+				runnerACompletedFirstLap = true;
+			}
+			else
+				runnerA = runnerA.next;
+			if(runnerB.next == null && !runnerBCompletedFirstLap) {
+				runnerB = headA;
+				runnerBCompletedFirstLap = true;
+			}
+				
+			else
+				runnerB = runnerB.next;
+		}
+		if(runnerA == null)
+			return null;
+		else
+			return runnerA;
+		
+	}
 }
