@@ -2,7 +2,7 @@ package linkedList.leetcode;
 
 public class PalindromeLinkedListN234 {
 	
-	public class ListNode {
+	public static class ListNode {
       int val;
       ListNode next;
       ListNode() {}
