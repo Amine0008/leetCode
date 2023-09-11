@@ -5,7 +5,7 @@ import java.util.List;
 
 public class BinaryTreeInorderTraversalN94 {
 
-  public class TreeNode {
+  public static class TreeNode {
       int val;
       TreeNode left;
       TreeNode right;
