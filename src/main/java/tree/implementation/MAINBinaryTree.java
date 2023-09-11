@@ -9,20 +9,16 @@ import java.util.Stack;
 public class MAINBinaryTree {
 
 	public static void main(String[] args) {
-		TreeNode n4 = new TreeNode("N4");
-		n4.left = new TreeNode("N8");
-		n4.right = new TreeNode("N9");
-		TreeNode n2 = new TreeNode("N2");
-		n2.right = new TreeNode("N5");
-		n2.left = n4;
-		TreeNode n3 = new TreeNode("N3");
-		n3.left = new TreeNode("N6");
-		n3.right = new TreeNode("N7");
-		TreeNode root = new TreeNode("N1");
-		root.left = n2;
-		root.right = n3;
+		TreeNode root = new TreeNode("10");
+		root.left = new TreeNode("5");
+		root.left.left = new TreeNode("4");
+		root.left.right = new TreeNode("7");
+		
+		root.right = new TreeNode("20");
+		root.right.left = new TreeNode("15");
+		root.right.right = new TreeNode("21");
 		////////////////////////////////////////
-		inOrderTraversalIterative(root);
+		inOrderTraversalIterative2(root);
 	}
 	
 
@@ -220,6 +216,22 @@ public class MAINBinaryTree {
 		}
 	}
 	
+	
+	public static void inOrderTraversalIterative2(TreeNode root) {
+		Stack<TreeNode> stack = new Stack<>();
+		TreeNode c = root;
+		
+		while(c != null || !stack.isEmpty()) {
+			while(c != null) {
+				stack.add(c);
+				c = c.left;
+			}
+			c = stack.pop();
+			System.out.print(" "+c.data);
+			c = c.right;
+			
+		}
+	}
 
 
 
