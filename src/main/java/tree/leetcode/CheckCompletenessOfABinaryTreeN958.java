@@ -1,7 +1,9 @@
 package tree.leetcode;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 import tree.leetcode.BinaryTreeInorderTraversalN94.TreeNode;
 
@@ -59,7 +61,24 @@ public class CheckCompletenessOfABinaryTreeN958 {
     	
     }
     
-    
+    public boolean isCompleteTree2(TreeNode root) {
+     Queue<TreeNode> q = new LinkedList<>();
+     q.add(root);
+     boolean encounteredNull = false;
+     TreeNode holder = null;
+     while(!q.isEmpty()) {
+    	 holder = q.remove();
+    	 if(encounteredNull &&  holder != null)
+    		 return false;
+    	 if(holder != null) {
+	    	 q.add(holder.left);
+	    	 q.add(holder.right);
+    	 }
+    	 else
+    		 encounteredNull = true;
+     }
+     return true;
+    }
     
     
     
