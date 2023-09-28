@@ -27,6 +27,32 @@ public class CombinationsN77 {
     	result.addAll(second);
     	return result;
     }
+
+    public List<List<Integer>> combine2(int n, int k) {
+    	List<List<Integer>> result = new ArrayList<>();
+    	backtracking2(result, new ArrayList<>(),n,k,1);
+    	return result;
+    }
+    
+    
+    public void backtracking2(List<List<Integer>> result , List<Integer> resultList, 
+    		int rangeLength, 
+    		int resultListLength, 
+    		int rangeStarting ){
+    	
+    	if(resultList.size() == resultListLength) 
+    		result.add(new ArrayList<>(resultList));
+    	
+    	for(int i = rangeStarting; i <=resultListLength-resultList.size()-1 ; i++) {
+    		resultList.add(i);
+    		backtracking2(result, resultList,rangeLength,resultListLength, i+1);
+    		resultList.remove(resultList.size()-1);
+    	}
+    	
+    }
+    
+    
+    
     
     
 }
