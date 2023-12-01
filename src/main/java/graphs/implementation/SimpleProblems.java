@@ -1,15 +1,16 @@
 package graphs.implementation;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 import java.util.Stack;
 
-public class DepthFirstSearch {
+public class SimpleProblems {
 	
 	public static void main(String[] args) {
 		Map<Integer, int[]> graph = new HashMap<>();
@@ -186,12 +187,123 @@ public class DepthFirstSearch {
 		return 1+counter;
 	}
 	
+	public static Map<Character, List<Character>> buildGraph(List<List<String>> graphEdges){
+		Map<Character, List<Character>> graph = new HashMap<>();
+		for(List<String> edge: graphEdges) {
+			if(!graph.containsKey(edge.get(0).charAt(0))) {
+				graph.put(edge.get(0).charAt(0), new ArrayList<>());
+			}
+			if(!graph.containsKey(edge.get(1).charAt(0))) {
+				graph.put(edge.get(1).charAt(0), new ArrayList<>());
+			}
+			graph.get(edge.get(0).charAt(0)).add(edge.get(1).charAt(0));
+			graph.get(edge.get(1).charAt(0)).add(edge.get(0).charAt(0));
+
+		}
+		return graph;
+	}
 	
+	public static int getLengthOfShortestPath(
+			Map<Character, List<Character>> graph,
+			char start,
+			char target) {
+		int edgeCounter = 0;
+		Queue<Character> myQ = new LinkedList<>();
+		Set<Character> visitedNodes = new HashSet<>();
+		
+		myQ.add(start);
+		myQ.add('*');
+		visitedNodes.add(start);
+		char holder;
+		while(!myQ.isEmpty()) {
+			holder = myQ.poll();
+			if(holder == '*') {
+				if(!myQ.isEmpty())
+					myQ.add('*');
+				edgeCounter++;
+				continue;
+			}
+			if(holder == target)
+				return edgeCounter;
+			for(Character c: graph.get(holder)) {
+				if(!visitedNodes.contains(c)) {
+					visitedNodes.add(c);
+					myQ.add(c);
+				}
+			}
+		}
+		return -1;
+		
 	
+	}
+	public static int getLengthOfShortestPath2(
+			Map<Character, List<Character>> graph,
+			char start,
+			char target) {
+		Queue<NodeAndDistance> myQ = new LinkedList<>();
+		Set<Character> visitedNodes = new HashSet<>();
+		if(start == target)
+			return 0;
+		myQ.add(new NodeAndDistance(start,0));
+		visitedNodes.add(start);
+		NodeAndDistance holder;
+		while(!myQ.isEmpty()) {
+			holder = myQ.poll();
+			for(Character c : graph.get(holder.node)) {
+				if(c == target)
+					return holder.distance+1;
+				if(!visitedNodes.contains(c)) {
+					visitedNodes.add(c);
+					myQ.add(new NodeAndDistance(c,holder.distance+1));
+				}
+			}
+		}
+		return -1;
+		
+		
+	}
+	static class NodeAndDistance{
+		char node;
+		int distance;
+		NodeAndDistance(char node, int distance){
+			this.node = node;
+			this.distance = distance;
+		}
+	}
 	
+	public static int minimumIsland(List<List<String>> grid) {
+		String[][] myGrid = new String[grid.size()][grid.get(0).size()];
+		for(int i = 0; i < grid.size(); i++) {
+			for(int j = 0; j < grid.get(0).size(); j++) {
+				myGrid[i][j] = grid.get(i).get(j);
+			}	
+		}
+		int minSize = Integer.MAX_VALUE;
+		int holder;
+		for(int i = 0; i < grid.size(); i++) {
+			for(int j = 0; j < grid.get(0).size(); j++) {
+				if(myGrid[i][j] == "W" || myGrid[i][j] == "VL")
+					continue;
+				holder = traverseLand(myGrid, i, j);
+				if(holder < minSize)
+					minSize = holder;
+			}
+		}
+		return minSize;
+	}
 	
-	
-	
+	public static int traverseLand(String[][] grid, int i, int j) {
+		if(i == grid.length || i < 0 || j < 0 || j == grid[0].length)
+			return 0;
+		if(grid[i][j] == "W" || grid[i][j]== "VL")
+			return 0;
+		
+		grid[i][j] =  "VL";
+		return 1+ traverseLand(grid, i+1,j)
+				+ traverseLand(grid, i-1,j)
+				+ traverseLand(grid, i,j+1)
+				+ traverseLand(grid, i,j-1);
+	}
 	
 	
 	
