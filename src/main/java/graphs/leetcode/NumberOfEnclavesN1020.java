@@ -1,8 +1,8 @@
 package graphs.leetcode;
 
-import com.sun.tools.javac.util.List;
 
 import java.util.LinkedList;
+import java.util.List;
 
 public class NumberOfEnclavesN1020 {
 
