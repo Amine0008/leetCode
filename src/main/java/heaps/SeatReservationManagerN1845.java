@@ -8,7 +8,7 @@ public class SeatReservationManagerN1845 {
         PriorityQueue<Integer> minHeap;
         public SeatManager(int n) {
             minHeap = new PriorityQueue<>();
-            for(int i = 1; i <= n; i++){
+                for(int i = 1; i <= n; i++){
                 minHeap.add(i);
             }
         }
