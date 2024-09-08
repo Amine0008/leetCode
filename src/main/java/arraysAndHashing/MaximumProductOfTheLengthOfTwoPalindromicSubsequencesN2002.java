@@ -6,44 +6,38 @@ import java.util.Map;
 public class MaximumProductOfTheLengthOfTwoPalindromicSubsequencesN2002 {
 
     public int maxProduct(String s) {
+        Map<Integer, Integer> ssLenghtMap = new HashMap<>();
+        String sRep;
 
-        String subsequenceString;
-        boolean isPalindromic;
-        int inputLength = s.length();
-        Map<Integer, Integer> map = new HashMap<>();
-        int maxProd = 0;
-        for(int mask=0;mask<(1<<inputLength);mask++){// generate bitmask from 1 to 2^n
+        for(int i = 1 ; i < (1 << s.length()); i++){
+            sRep = getStringFromBin(i, s);
+            if(isPalindromic(sRep))
+                ssLenghtMap.put(i,sRep.length());
+        }
 
-            subsequenceString = getString(mask, s);
-            isPalindromic = stringIsPalindromic(subsequenceString);
-            if (isPalindromic)
-                map.put(mask, subsequenceString.length());
-
-
-            for (Integer key1 : map.keySet()) {
-                for (Integer key2 : map.keySet()) {
-                    if ((key1 & key2) == 0)
-                        maxProd = Math.max(map.get(key1) * map.get(key2), maxProd);
-                }
-
+        int maxProduct = 0;
+        for(Integer x1: ssLenghtMap.keySet()){
+            for(Integer x2: ssLenghtMap.keySet()){
+                if((x1 & x2) == 0 && ssLenghtMap.get(x1)*ssLenghtMap.get(x2) > maxProduct)
+                    maxProduct = ssLenghtMap.get(x1)*ssLenghtMap.get(x2);
             }
         }
-        return maxProd;
+        return maxProduct;
+
     }
 
-    String getString(int bitmask, String ogString){
-        String temp="";
-        for(int i=0;i<ogString.length();i++){
-            if((bitmask & (1<<i)) !=0) // generate the string from the mask
-                temp+=ogString.charAt(i);
+    public String getStringFromBin(int bin, String ogString){
+        StringBuilder sb = new StringBuilder();
+        for(int i = ogString.length()-1; i >= 0; i--){
+            if(((1<<i) & bin) != 0)
+                sb.append(ogString.charAt(i));
         }
-        return temp;
+        return sb.toString();
     }
-
-    boolean stringIsPalindromic(String s){
+    public boolean isPalindromic(String s) {
         int l = 0;
-        int r  = s.length()-1;
-        while(l < r){
+        int r = s.length()-1;
+        while(l<r) {
             if(s.charAt(l) != s.charAt(r))
                 return false;
             l++;
