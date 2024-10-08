@@ -1,8 +1,25 @@
 package arraysAndHashing.twoPointers.run2;
 
 public class TwoSumInputArrayIsSortedN167 {
-
     public int[] twoSum(int[] numbers, int target) {
+        int left = 0;
+        int right = numbers.length-1;
+        int currentSum;
+        int[] result = new int[2];
+        while(left < right) {
+            currentSum = numbers[left]+numbers[right];
+            if(currentSum == target){
+                result = new int[]{left+1, right+1};
+                break;
+            }
+            if(currentSum < target)
+                left++;
+            else
+                right--;
+        }
+        return result;
+    }
+    public int[] twoSum2(int[] numbers, int target) {
         int holder;
         int[] result = new int[2];
         for(int i = 0; i < numbers.length-1; i++){
@@ -15,8 +32,7 @@ public class TwoSumInputArrayIsSortedN167 {
         return result;
     }
 
-    public int runBinarySearchIteratively(
-            int[] sortedArray, int key, int low, int high) {
+    public int runBinarySearchIteratively(int[] sortedArray, int key, int low, int high) {
         int index = sortedArray.length;
 
         while (low <= high) {
